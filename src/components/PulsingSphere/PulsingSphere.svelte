@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { Renderer, Transform, Camera, Box, Program, Mesh, Vec3 } from 'ogl'
+  import { Renderer, Transform, Camera, Box, Program, Mesh, Vec3, Vec4 } from 'ogl'
 
   let scene = null
   let geometry = null
@@ -220,6 +220,17 @@
 
 
 
+    const uniforms = {
+      iGlobalTime: { value: 1.0 },
+      iChannelTime: { value: 1.0 },
+      iMouse: { value: new Vec4(1, 1, 1, 1)},
+      iDate: { value: new Vec4(1, 1, 1, 1)},
+      iSampleRate: { value: 1.0 },
+      iChannelResolution: new Vec3(100, 100, 0),
+      iFrame: { value: 1 },
+      iTimeDelta: { value: 1.0 },
+      iFrameRate: { value: 1.0 }
+    }
 
 
     scene = new Transform()
@@ -229,10 +240,7 @@
     program = new Program(gl, {
       vertex: vertexShader,
       fragment: fragmentShader,
-      uniforms: {
-        iGlobalTime: { value: 1.0 },
-        iResolution: { value: new Vec3(100, 100, 0) }
-      }
+      uniforms
     })
 
     // program = new Program(gl, {
