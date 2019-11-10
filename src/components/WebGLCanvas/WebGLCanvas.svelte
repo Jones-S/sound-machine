@@ -19,7 +19,7 @@
 
 	function initWebGL() {
 
-		const vertex = `
+		const vertexShader = `
 			attribute vec2 uv;
 			attribute vec2 position;
 			varying vec2 vUv;
@@ -29,7 +29,7 @@
 			}
 		`
 
-		const fragment = `
+		const fragmentShader = `
 			precision highp float;
 			precision highp int;
 			uniform sampler2D tWater;
@@ -74,6 +74,7 @@
       uv: { size: 2, data: new Float32Array([0, 0, 2, 0, 0, 2]) }
     });
 
+
     const texture = new Texture(gl, {
       minFilter: gl.LINEAR,
       magFilter: gl.LINEAR
@@ -95,8 +96,8 @@
     }
 
     program = new Program(gl, {
-      vertex,
-      fragment,
+      vertex: vertexShader,
+      fragment: fragmentShader,
       uniforms: {
         uTime: { value: 0 },
         tWater: { value: texture },
@@ -155,6 +156,7 @@
 
   function updateMouse(e) {
     e.preventDefault();
+
     if (e.changedTouches && e.changedTouches.length) {
       e.x = e.changedTouches[0].pageX;
       e.y = e.changedTouches[0].pageY;
@@ -163,8 +165,10 @@
       e.x = e.pageX;
       e.y = e.pageY;
     }
+
     // Get mouse value in 0 to 1 range, with y flipped
     mouse.set(e.x / gl.renderer.width, 1.0 - e.y / gl.renderer.height);
+
     // Calculate velocity
     if (!lastTime) {
       // First frame
