@@ -8,10 +8,12 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte-preprocess": "^3.2.2",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "svelte-preprocess": "^3.2.2"
   },
   "dependencies": {
+    "eslint": "^6.6.0",
+    "eslint-plugin-svelte3": "^2.7.3",
     "node-sass": "^4.13.0",
     "ogl": "^0.0.32",
     "sirv-cli": "^0.4.4"
@@ -20,6 +22,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --single",
-    "start:dev": "sirv public --single --dev"
+    "start:dev": "sirv public --single --dev",
+    "lint": "eslint --ext .js,.svelte --ignore-path .gitignore ."
   }
 }
