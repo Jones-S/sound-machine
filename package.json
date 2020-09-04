@@ -14,7 +14,7 @@
   "dependencies": {
     "eslint": "^6.6.0",
     "eslint-plugin-svelte3": "^2.7.3",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "ogl": "^0.0.32",
     "sirv-cli": "^0.4.4"
   },
